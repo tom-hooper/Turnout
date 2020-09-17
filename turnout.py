@@ -19,8 +19,7 @@ from BeautifulSoup import BeautifulSoup
 logPath = '/var/log/turnout/turnout.log'
 my_logger = logging.getLogger('MyLogger')
 my_logger.setLevel(logging.DEBUG)
-handler = logging.handlers.RotatingFileHandler(
-                                                logPath, maxBytes=1000000, backupCount=5)
+handler = logging.handlers.RotatingFileHandler(,maxBytes=1000000, backupCount=5)
 my_logger.addHandler(handler)
 
 def scrapeBART():
@@ -40,7 +39,7 @@ def scrapeBART():
         br.select_form(nr=0)
         br.set_all_readonly(False)
         #login to BARTwebsite with bart credentials
-        #bart username and pass required here. 
+        #bart username and pass required here.
         br.form['txtUsername'] = ''
         br.form['txtPassword'] = ''
         response = br.submit(name='submit').read()
@@ -79,7 +78,7 @@ def tableScan(x):
                 return (map, pager, message, isTurnout, id)
 
 def mapLookup(x):
-        #google developer API key required here. 
+        #google developer API key required here.
         api_key = ''
         origin = 'CFA+upper+ferntree+Gully'
         n = 3
@@ -188,3 +187,5 @@ if __name__ == "__main__":
         time.sleep(180)
         lastID = '0'
         sys.exit(main(lastID))
+#this is a test comment
+#this is another test comment
