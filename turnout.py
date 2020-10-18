@@ -19,7 +19,7 @@ from BeautifulSoup import BeautifulSoup
 logPath = '/var/log/turnout/turnout.log'
 my_logger = logging.getLogger('MyLogger')
 my_logger.setLevel(logging.DEBUG)
-handler = logging.handlers.RotatingFileHandler(,maxBytes=1000000, backupCount=5)
+handler = logging.handlers.RotatingFileHandler(logPath, maxBytes=1000000, backupCount=5)
 my_logger.addHandler(handler)
 
 def scrapeBART():
@@ -187,5 +187,3 @@ if __name__ == "__main__":
         time.sleep(180)
         lastID = '0'
         sys.exit(main(lastID))
-#this is a test comment
-#this is another test comment
