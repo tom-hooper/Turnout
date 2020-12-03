@@ -38,7 +38,7 @@ try:
                 address = line[22:28].replace(" ", "").zfill(7)
                 message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
                 output=(address+' '+curtime()+' '+ message+'\n')
-                print address, curtime(), message
+                print(address, curtime(), message)
                 with open('pocsag.txt','a') as f:
                     f.write(output)
         if not "Alpha:" in line:
