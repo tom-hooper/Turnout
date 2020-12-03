@@ -9,3 +9,4 @@ sdr.freq_correction = 10   # PPM
 sdr.gain = 'auto'
 
 print(sdr.read_samples(512))
+#test
