@@ -21,12 +21,12 @@ def curtime():
 with open('error.txt','a') as file:
     file.write(('#' * 20) + '\n' + curtime() + '\n')
 
-multimon_ng = subprocess.Popen("rtl_fm -f 148.9125M -s 2.048e6 -g 0 -p 65 | multimon-ng \
+multimon_ng = subprocess.Popen("rtl_fm -f 148.9125M -s 22050 | multimon-ng -t raw \
                                 -a POCSAG512 -a POCSAG1200 -a POCSAG2400 \
-                                -f alpha -t raw -",
+                                -e -f alpha /dev/stdin",
                                #stdin=rtl_fm.stdout,
                                stdout=subprocess.PIPE,
-                               stderr=open('error.txt','a'),
+                               stderr=open('error.legal','a'),
                                shell=True)
 
 try:
