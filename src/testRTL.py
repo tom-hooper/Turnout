@@ -33,8 +33,8 @@ try:
     while True:
         line = multimon_ng.stdout.readline()
         multimon_ng.poll()
-        if line.__contains__("Alpha:"):    # filter out only the alpha
-            if line.startswith('POCSAG'):
+        if line.__contains__(b'Alpha:'):    # filter out only the alpha
+            if line.startswith(b'POCSAG'):
                 address = line[22:28].replace(" ", "").zfill(7)
                 message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
                 output=(address+' '+curtime()+' '+ message+'\n')
