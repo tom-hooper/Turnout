@@ -33,6 +33,7 @@ try:
     while True:
         line = multimon_ng.stdout.readline()
         multimon_ng.poll()
+        print(line)
         if line.__contains__('Alpha:'):    # filter out only the alpha
             if line.startswith('POCSAG'):
                 address = line[22:28].replace(" ", "").zfill(7)
