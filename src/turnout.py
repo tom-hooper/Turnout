@@ -9,11 +9,15 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.rl_config import defaultPageSize
 from reportlab.lib.units import inch
 from reportlab.lib.utils import ImageReader
+
 #module to convert GridRef to longLat
 import utm
 #modules for webpage scraping
 import mechanize
 from BeautifulSoup import BeautifulSoup
+import pyrtlsdr
+
+
 
 #Setup logging environment
 logPath = '/var/log/turnout/turnout.log'
@@ -22,31 +26,30 @@ my_logger.setLevel(logging.DEBUG)
 handler = logging.handlers.RotatingFileHandler(logPath, maxBytes=1000000, backupCount=5)
 my_logger.addHandler(handler)
 
-def scrapeBART():
-        global my_logger
-
-        """Access the BART webpage"""
-        br = mechanize.Browser()
-        br.set_handle_robots(False)
-        br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
-        url = 'http://bart.emerg.com.au/administration/Login/Live_Feed_Login.aspx'
-        try:
-                br.open(url)
-        except URLError:
-                time.sleep(30)
-                br.open(url)
-        response = br.response().read()
-        br.select_form(nr=0)
-        br.set_all_readonly(False)
+#def scrapeBART():
+#        global my_logger
+#
+#        """Access the BART webpage"""
+#        br = mechanize.Browser()
+#        br.set_handle_robots(False)
+#        br.addheaders = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+ #       url = 'http://bart.emerg.com.au/administration/Login/Live_Feed_Login.aspx'
+#                br.open(url)
+#        except URLError:
+#                time.sleep(30)
+#                br.open(url)
+#        response = br.response().read()
+#        br.select_form(nr=0)
+#        br.set_all_readonly(False)
         #login to BARTwebsite with bart credentials
-        #bart username and pass required here.
-        br.form['txtUsername'] = ''
-        br.form['txtPassword'] = ''
-        response = br.submit(name='submit').read()
-        soup = BeautifulSoup(response)
-        table = soup.find('table', {"class" : "AdminGridView"})
-        return table
-
+#        #bart username and pass required here.
+#        br.form['txtUsername'] = ''
+#        br.form['txtPassword'] = ''
+#        response = br.submit(name='submit').read()
+#        soup = BeautifulSoup(response)
+#        table = soup.find('table', {"class" : "AdminGridView"})
+#        return table
+#####Removed, introduded rtlsdr instead with POCSAG decoder
 
 def tableScan(x):
         global my_logger

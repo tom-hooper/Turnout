@@ -43,7 +43,7 @@ try:
                     f.write(output)
         if not b'Alpha:' in line:
             with open("missed.txt","a") as missed:
-                missed.write(line + '\n')
+                missed.write(line + b'\n')
 
 except KeyboardInterrupt:
     os.kill(multimon_ng.pid, 9)
