@@ -36,12 +36,12 @@ try:
         if line.__contains__(b'Alpha:'):    # filter out only the alpha
             if line.startswith(b'POCSAG'):
                 address = line[22:28].replace(" ", "").zfill(7)
-                message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
+                message = line.split(b'Alpha:   ')[1].strip().rstrip('<ETB>').strip()
                 output=(address+' '+curtime()+' '+ message+'\n')
                 print(address, curtime(), message)
                 with open('pocsag.txt','a') as f:
                     f.write(output)
-        if not "Alpha:" in line:
+        if not b'Alpha:' in line:
             with open("missed.txt","a") as missed:
                 missed.write(line + '\n')
 
