@@ -40,10 +40,10 @@ try:
         #        message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
         #        output=(address+' '+curtime()+' '+ message+'\n')
         #        print(address, curtime(), message)
-                with open('pocsag.txt','a') as f:
+                with open('pocsag.txt','ab') as f:
                     f.write(output)
         if not b'Alpha:' in line:
-            with open("missed.txt","a") as missed:
+            with open("missed.txt","ab") as missed:
                 missed.write(line + b'\n')
 
 except KeyboardInterrupt:
