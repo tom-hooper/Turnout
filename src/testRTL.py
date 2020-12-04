@@ -38,8 +38,8 @@ try:
         if line.__contains__(b'Alpha:'):    # filter out only the alpha
             if line.startswith(b'POCSAG'):
                 address = line[22:28].replace(b" ", b"").zfill(7)
+                message = line.split('Alpha:   ')[1]
                 message = re.sub(b'(<NUL>)',b'', message.rstrip())
-        #        message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
                 output=(address+b' '+curtime()+b' '+ message+b'\n')
                 print(address, curtime(), message)
                 with open('pocsag.txt','ab') as f:
