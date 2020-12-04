@@ -14,6 +14,7 @@ import time
 import sys
 import subprocess
 import os
+import re
 
 def curtime():
     return time.strftime("%H:%M:%S %Y-%m-%d")
@@ -36,13 +37,14 @@ try:
         #print(line)
         if line.__contains__(b'Alpha:'):    # filter out only the alpha
             if line.startswith(b'POCSAG'):
-        #        address = line[22:28].replace(" ", "").zfill(7)
+                address = line[22:28].replace(b" ", b"").zfill(7)
+                message = re.sub(b'(<NUL>)',b'', message.rstrip())
         #        message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
-        #        output=(address+b' '+curtime()+b' '+ message+b'\n')
-        #        print(address, curtime(), message)
+                output=(address+b' '+curtime()+b' '+ message+b'\n')
+                print(address, curtime(), message)
                 with open('pocsag.txt','ab') as f:
-                    #f.write(output)
-                    f.write(line)
+                    f.write(output)
+                    #f.write(line)
         if not b'Alpha:' in line:
             with open("missed.txt","ab") as missed:
                 missed.write(line + b'\n')
