@@ -23,7 +23,7 @@ with open('error.txt','a') as file:
 
 multimon_ng = subprocess.Popen("rtl_fm -f 148.9125M -s 22050 | multimon-ng -t raw \
                                 -a POCSAG512 -a POCSAG1200 -a POCSAG2400 \
-                                -e -f alpha /dev/stdin",
+                                -e -f alpha /dev/stdin -",
                                #stdin=rtl_fm.stdout,
                                stdout=subprocess.PIPE,
                                stderr=open('error.legal','a'),
@@ -33,17 +33,17 @@ try:
     while True:
         line = multimon_ng.stdout.readline()
         multimon_ng.poll()
-        if line.__contains__(b'Alpha:'):    # filter out only the alpha
-            if line.startswith(b'POCSAG'):
+        if line.__contains__('Alpha:'):    # filter out only the alpha
+            if line.startswith('POCSAG'):
                 address = line[22:28].replace(" ", "").zfill(7)
-                message = line.split(b'Alpha:   ')[1].strip().rstrip('<ETB>').strip()
+                message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
                 output=(address+' '+curtime()+' '+ message+'\n')
                 print(address, curtime(), message)
-                with open('pocsag.txt','ab') as f:
+                with open('pocsag.txt','a') as f:
                     f.write(output)
-        if not b'Alpha:' in line:
-            with open("missed.txt","ab") as missed:
-                missed.write(line + b'\n')
+        if not 'Alpha:' in line:
+            with open("missed.txt","a") as missed:
+                missed.write(line + '\n')
 
 except KeyboardInterrupt:
     os.kill(multimon_ng.pid, 9)
