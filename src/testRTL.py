@@ -35,13 +35,14 @@ try:
         multimon_ng.poll()
         print(line)
         if line.__contains__(b'Alpha:'):    # filter out only the alpha
-        #    if line.startswith('POCSAG'):
+            if line.startswith(b'POCSAG'):
         #        address = line[22:28].replace(" ", "").zfill(7)
         #        message = line.split('Alpha:   ')[1].strip().rstrip('<ETB>').strip()
-        #        output=(address+' '+curtime()+' '+ message+'\n')
+        #        output=(address+b' '+curtime()+b' '+ message+b'\n')
         #        print(address, curtime(), message)
                 with open('pocsag.txt','ab') as f:
-                    f.write(output)
+                    #f.write(output)
+                    f.write(line)
         if not b'Alpha:' in line:
             with open("missed.txt","ab") as missed:
                 missed.write(line + b'\n')
