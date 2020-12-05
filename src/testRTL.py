@@ -38,7 +38,7 @@ try:
         if line.__contains__(b'Alpha:'):    # filter out only the alpha
             if line.startswith(b'POCSAG'):
                 address = line[22:28].replace(b" ", b"").zfill(7)
-                message = line.split('Alpha:   ')[1]
+                message = line.split(b'Alpha:   ')[1]
                 message = re.sub(b'(<NUL>)',b'', message.rstrip())
                 output=(address+b' '+curtime()+b' '+ message+b'\n')
                 print(address, curtime(), message)
