@@ -41,7 +41,7 @@ try:
                 message = line.split(b'Alpha:   ')[1]
                 message = re.sub(b'(<NUL>)',b'', message.rstrip())
                 output=(address+b' '+ message+b'\n')
-                print(address, curtime(), message)
+                #print(address, curtime(), message)
                 with open('pocsag.txt','ab') as f:
                     f.write(output)
                     #f.write(line)
